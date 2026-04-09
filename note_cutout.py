@@ -30,7 +30,7 @@ with open('/workspaces/CS32-final-project/CONFIG.txt') as settings:
         sys.exit(1)
 
 def main()
-    pass
+    for 
 
 
 
