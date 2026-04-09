@@ -29,10 +29,12 @@ with open('/workspaces/CS32-final-project/CONFIG.txt') as settings:
     if settings_error:
         sys.exit(1)
 
-def main()
-    pass
 
 
 
 
-
+print(stop_length)
+print(midi_offset)
+print(base_pitch)
+print(tuning_error_margin)
+print(num_pipes)
