@@ -1,6 +1,7 @@
 import sys
 from NameDictionaries import note_names, hz_to_midi, midi_to_hz, midi_note_offset
 import wave
+import os
 
 # grabs settings from CONFIG.txt and assigns them to variables
 with open('/workspaces/CS32-final-project/CONFIG.txt') as settings:
@@ -29,8 +30,14 @@ with open('/workspaces/CS32-final-project/CONFIG.txt') as settings:
     if settings_error:
         sys.exit(1)
 
-def main()
-    for 
+def main():
+    path = 'imput_files'
+    try:
+        dir_list = os.listdir(path)
+    except FileNotFoundError:
+        print('You must have files in the "input_files" folder.')
+        sys.exit(1)
+    print(dir_list)
 
 
 
