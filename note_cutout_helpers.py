@@ -59,11 +59,11 @@ def get_pitch(data, sample_rate):
     # Get pitch
     time, frequency, confidence, activation = crepe.predict(data, sample_rate)
 
-    high_confidence_pitch = np.mean(frequency[confidence > 0.85])
+    high_confidence_pitch = np.mean(frequency[confidence > 0.90])
 
     return high_confidence_pitch
 
-# TEST COMMENT
+
 
 
 def main():
