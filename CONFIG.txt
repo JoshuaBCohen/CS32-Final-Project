@@ -1,4 +1,4 @@
-Stop length number (Ex. 8ft organ stop would be 8): 5 1/3
-Organ base pitch (default in american is 440): 440
-Pitch margin of error (number specifies +/- percent off): 1
-Number of pipes in rank: 54
+Stop length number (Ex. 8ft organ stop would be 8): 8
+Organ base pitch (default in american is 440): 426
+Pitch margin of error (number specifies +/- percent off): 3
+Number of pipes in rank: 12
