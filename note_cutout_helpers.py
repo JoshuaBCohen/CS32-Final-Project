@@ -23,15 +23,6 @@ def find_notes(data):
             (9310696, 10217565),
             (10271182, 11188596),
             (11247028, 12140267),
-        ]
-
-
-
-    #find {window_size} moving average of amplitudes (based on code from Google Gemini)
-    window_size = 7
-    moving_average = np.convolve(np.array(data), np.ones(window_size) / window_size, mode='valid')
-
-    rms = np.sqrt(np.mean(np.square(amplitudes)))
 
 
 def cutout_notes(data, note_list):
