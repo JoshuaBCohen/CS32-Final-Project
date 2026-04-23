@@ -4,7 +4,7 @@ This is a tool to cut out and name notes from WAVE audio files for use in making
 
 To use it, place the python files in a folder with two additional folders called "input_files" and "output_files." Then, place the noise reduced files into the "input_files" folder. Run the script note_cutout.py to cutout the notes. Due to the machine leaning, the cutout process might take time depending on the hardware used. For best results, run locally. 
 
-Claude 4.6 was used for assistance writing code for parts of the get_pitch() function. It helped write the code to convert stereo files to mono and to normalize them to 32 bit floats for use pitch detecting. No other LLMs were used.
+Claude 4.6 was used for assistance writing code for parts of the get_pitch() function. It helped write the code to convert stereo files to mono and to normalize them to 32 bit floats for use pitch detecting. No other parts of the code used LLMs.
 
 To run this code, numpy, scipy, crepe, and tensorflow are required. 
 
