@@ -17,7 +17,7 @@ with open('CONFIG.txt') as settings:
         settings_error = True
     try:
         base_pitch = float(settings.readline().split(':')[1].strip())
-        base_pitch_offset = base_pitch - 440
+        base_pitch_offset = 440 - base_pitch
     except ValueError:
         print('"Organ Base Pitch" must be a valid float. Please update CONFIG.txt and try again.')
         settings_error = True
@@ -76,6 +76,7 @@ def main():
                     print("WARNING: no pitch found. Skipping.")
                 else:
                     file_name = note_names[midi_num + midi_offset]
+                    print(f'Saving {file_name}...')
                     wavfile.write(f"output_files/{file_name}.wav", samplerate, notes)
 
 if __name__ == "__main__":
