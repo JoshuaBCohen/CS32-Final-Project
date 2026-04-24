@@ -26,6 +26,9 @@ def find_notes(data):
             (11247028, 12140267)]
 
 
+    return
+
+
 def cutout_notes(data, note_list):
     ''' Takes in the data from a wave file and a list of tuples indecating the sample numbers where each note starts and stops.
         Cuts out octave of wave files into individual notes. Returns a dictionary with keys "n" where n is the number of the note
