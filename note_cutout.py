@@ -59,7 +59,7 @@ def main():
             print(f'{file} is not a WAVE file. Skipping it.')
         else:
             # opens input wave file
-            samplerate, data = wavfile.read(f'input_files/{file}')
+            samplerate, data = wavfile.read(os.path.join(path, file))
 
             # uses find_notes() to determine the start and stop of notes
             cutout_samples = helpers.find_notes('skip') # function call on 'skip' is temporary for testing only
@@ -87,7 +87,7 @@ def main():
                 else:
                     file_name = note_names[midi_num + midi_offset]
                     print(f'Saving {file_name}...')
-                    wavfile.write(f"{output_folder}/{file_name}.wav", samplerate, notes)
+                    wavfile.write(os.path.join(output_folder, f"{file_name}.wav"), ...)
 
 if __name__ == "__main__":
     main()
