@@ -5,6 +5,9 @@ from scipy.io import wavfile
 import os
 import crepe
 import numpy as np
+import tkinter as tk
+from tkinter.filedialog import askdirectory
+tk.Tk().withdraw() # part of the import if you are not using other tkinter functions
 
 # grabs settings from CONFIG.txt and assigns them to variables
 with open('CONFIG.txt') as settings:
@@ -35,8 +38,15 @@ with open('CONFIG.txt') as settings:
         sys.exit(1)
 
 def main():
+    # Asks user for input and output folder and checks to makesure a path was entered
+    path = askdirectory(title='Choose folder containing input files')
+    if path == '':
+        sys.exit('No input folder chosen. Exiting.')
+    output_folder = askdirectory(title='Choose output folder')
+    if output_folder == '':
+        sys.exit('No output folder chosen. Exiting.')
+
     # Makes list of files in input_files to be looped through later in main()
-    path = 'input_files'
     try:
         dir_list = os.listdir(path)
     except FileNotFoundError:
@@ -77,7 +87,7 @@ def main():
                 else:
                     file_name = note_names[midi_num + midi_offset]
                     print(f'Saving {file_name}...')
-                    wavfile.write(f"output_files/{file_name}.wav", samplerate, notes)
+                    wavfile.write(f"{output_folder}/{file_name}.wav", samplerate, notes)
 
 if __name__ == "__main__":
     main()
