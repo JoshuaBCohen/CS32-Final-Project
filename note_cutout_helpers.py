@@ -3,6 +3,7 @@ from NameDictionaries import note_names, hz_to_midi, midi_to_hz, midi_note_offse
 from scipy.io import wavfile
 import numpy as np
 import crepe
+import os
 
 
 def find_notes(data):
