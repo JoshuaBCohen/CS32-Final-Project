@@ -58,7 +58,19 @@ def get_pitch(data, sample_rate):
 
 
 def main():
-    print(find_notes('skip'))
+    path = 'input_files'
+    try:
+        dir_list = os.listdir(path)
+    except FileNotFoundError:
+        print('You must have files in the "input_files" folder.')
+        sys.exit(1)
+
+    # Loops through files in dir_list opening each
+    for file in dir_list:
+        if not file.endswith('.wav'):
+            print(f'{file} is not a WAVE file. Skipping it.')
+        else:
+            print(find_notes(file))
 
 
 
