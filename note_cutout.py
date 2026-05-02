@@ -1,13 +1,10 @@
 import sys
+import os
+import numpy as np
 from NameDictionaries import note_names, hz_to_midi, midi_to_hz, midi_note_offset
 import note_cutout_helpers as helpers
 from scipy.io import wavfile
-import os
 import crepe
-import numpy as np
-import tkinter as tk
-from tkinter.filedialog import askdirectory
-tk.Tk().withdraw() # part of the import if you are not using other tkinter functions
 
 # grabs settings from CONFIG.txt and assigns them to variables
 with open('CONFIG.txt') as settings:
@@ -20,7 +17,7 @@ with open('CONFIG.txt') as settings:
         settings_error = True
     try:
         base_pitch = float(settings.readline().split(':')[1].strip())
-        base_pitch_offset = 440 - base_pitch
+        base_pitch_offset = base_pitch - 440
     except ValueError:
         print('"Organ Base Pitch" must be a valid float. Please update CONFIG.txt and try again.')
         settings_error = True
@@ -38,15 +35,8 @@ with open('CONFIG.txt') as settings:
         sys.exit(1)
 
 def main():
-    # Asks user for input and output folder and checks to makesure a path was entered
-    path = askdirectory(title='Choose folder containing input files')
-    if path == '':
-        sys.exit('No input folder chosen. Exiting.')
-    output_folder = askdirectory(title='Choose output folder')
-    if output_folder == '':
-        sys.exit('No output folder chosen. Exiting.')
-
     # Makes list of files in input_files to be looped through later in main()
+    path = 'input_files'
     try:
         dir_list = os.listdir(path)
     except FileNotFoundError:
@@ -59,35 +49,37 @@ def main():
             print(f'{file} is not a WAVE file. Skipping it.')
         else:
             # opens input wave file
-            samplerate, data = wavfile.read(os.path.join(path, file))
+            samplerate, data = wavfile.read(f'input_files/{file}')
 
             # uses find_notes() to determine the start and stop of notes
-            cutout_samples = helpers.find_notes('skip') # function call on 'skip' is temporary for testing only
+            cutout_samples = helpers.find_notes(data, samplerate)
 
             # cuts out the the main wave file into smaller wave files in dict notes_dict
             notes_dict = helpers.cutout_notes(data, cutout_samples)
 
+            # ensure output directory exists
+            os.makedirs('output_files', exist_ok=True)
+
             # loops through cutout notes and: pitch detects, finds midi notes with margin of error, and saves notes with appropriate name
             for notes in notes_dict.values():
 
-                # pitch detects and makes tuple with pitch margins of error
-                pitch = helpers.get_pitch(notes, samplerate) + base_pitch_offset # pitch normalized to A = 440 hz tuning
-                pitch_error = (pitch + pitch * tuning_error_margin / 100), (pitch - pitch * tuning_error_margin / 100)
+                # pitch detects using CREPE and normalizes to A = 440 hz tuning
+                pitch = helpers.get_pitch(notes, samplerate) + base_pitch_offset
 
-                # loops through hz_to_midi to find appropriate midi note number
-                midi_num = 0
-                for frequencies, midi in hz_to_midi.items():
-                    if frequencies > pitch_error[1] and frequencies < pitch_error[0]:
-                        midi_num = midi
-                        break
+                # convert detected pitch to nearest MIDI note number using formula
+                midi_num = helpers.hz_to_midi_number(pitch, 440.0)
 
                 # determines file name and saves note with that name
-                if midi_num == 0:
-                    print("WARNING: no pitch found. Skipping.")
+                if midi_num is None or midi_num == 0:
+                    print(f"WARNING: no pitch found (detected {pitch:.1f} Hz). Skipping.")
                 else:
+                    # optional: warn if pitch is outside tuning error margin
+                    if not helpers.validate_pitch(pitch, midi_num, 440.0, tuning_error_margin):
+                        expected_hz = midi_to_hz.get(midi_num, 0)
+                        print(f"    WARNING: detected {pitch:.1f} Hz is outside +/-{tuning_error_margin}% of expected {expected_hz:.1f} Hz for MIDI {midi_num}. Proceeding anyway.")
+
                     file_name = note_names[midi_num + midi_offset]
-                    print(f'Saving {file_name}...')
-                    wavfile.write(os.path.join(output_folder, f"{file_name}.wav"), ...)
+                    wavfile.write(f"output_files/{file_name}.wav", samplerate, notes)
 
 if __name__ == "__main__":
     main()
