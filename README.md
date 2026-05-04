@@ -25,7 +25,7 @@ Claude 4.6 was used for assistance writing code for the following parts:
 
 Code that allows user to open folders was made with code written by Reddit user socal_nerdtastic as reference.
 
-## Setup and Usage
+# Setup and Usage
 
 Given the use of Crepe for pitch detection, Python 3.13 is unsupported. Also, TensorFlow does not run on some cloud-based IDEs. For best results, a locall IDE with a supported GPU is recommended. For GPU acceleration, more 16+ GB of VRAM is reccomended.
 
@@ -34,6 +34,11 @@ To run this code, numpy, scipy, crepe, librosa, tkinter, and tensorflow are requ
 To use it, download and place all python files and the CONFIG file in a folder. Run the script note_cutout.py to cutout the notes. To choose where the input files are located and where to save the cutout files, the program will offer the user two file windows to choose their input and output folders. Due to the machine leaning, the cutout process might take non-negligible time depending on the hardware used.
 
 To use GPU acceleration to speed up the machine learning, in the CONFIG file, set the GPU acceleraion setting to "Y".
+
+# Audio File for Testing
+
+To download a test audio file, please view the following link. Only limited a single octave is avalible for testing. More files cannot be offered because of the confidentiality of the non-release ready files for Coral Pipes LLC sample sets.
+https://drive.google.com/drive/folders/1vLe5IM5MVD35b8gkiuvRC3c7btssp6qj?usp=sharing
 
 
 
