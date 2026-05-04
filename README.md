@@ -31,7 +31,7 @@ Given the use of Crepe for pitch detection, Python 3.13 is unsupported. Also, Te
 
 To run this code, numpy, scipy, crepe, librosa, tkinter, and tensorflow are required. Use the "pip install..." command to download each before runing note_cutout.py
 
-To use it, download and place all python files and the CONFIG file in a folder. Run the script note_cutout.py to cutout the notes. To choose where the input files are located and where to save the cutout files, the program will offer the user two file windows to choose their input and output folders. Due to the machine leaning, the cutout process might take time depending on the hardware used.
+To use it, download and place all python files and the CONFIG file in a folder. Run the script note_cutout.py to cutout the notes. To choose where the input files are located and where to save the cutout files, the program will offer the user two file windows to choose their input and output folders. Due to the machine leaning, the cutout process might take non-negligible time depending on the hardware used.
 
 To use GPU acceleration to speed up the machine learning, in the CONFIG file, set the GPU acceleraion setting to "Y".
 
