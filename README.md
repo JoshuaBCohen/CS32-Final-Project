@@ -18,12 +18,12 @@ GenAI helped us troubleshoot and understand how to run the code locally on our G
 
 Claude 4.6 was used for assistance writing code for the following parts:
 1. get_pitch() function - it helped write the code to convert stereo files to mono and to normalize them to 32 bit floats for use pitch detecting.
-2. to help write the logic to ensure our audio arrays didn't go out of bounds to make our code more robust:
-  total_samples = len(data)
-  boundaries = [
-    (max(0, s), min(total_samples, e))
-    for s, e in boundaries
-  ]
+2. to help write the logic to ensure our audio arrays didn't go out of bounds to make our code more robust: \n
+  total_samples = len(data)\n
+  boundaries = [\n
+    (max(0, s), min(total_samples, e))\n
+    for s, e in boundaries\n
+  ]\n
 3. We also used Generative AI to help identify and troubleshoot syntax errors during development.
 
 Code that allows user to open folders was made with code written by Reddit user socal_nerdtastic as reference.
