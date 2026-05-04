@@ -40,6 +40,9 @@ To use GPU acceleration to speed up the machine learning, in the CONFIG file, se
 To download a test audio file, please view the following link. Only limited a single octave is avalible for testing. More files cannot be offered because of the confidentiality of the non-release ready files for Coral Pipes LLC sample sets.
 https://drive.google.com/drive/folders/1vLe5IM5MVD35b8gkiuvRC3c7btssp6qj?usp=sharing
 
+The noise reduced octave given is taken from the upcoming sample set of the Hebron Lutheran Church organ.
+https://coralpipesorgan.wixsite.com/coral-pipes/hebron-lutheran-church
+
 
 
 
