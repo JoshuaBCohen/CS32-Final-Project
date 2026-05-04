@@ -4,8 +4,7 @@ This is a tool to cut out and name notes from WAVE audio files for use in making
 
 We used GenAI to troubleshoot when we were experiencing syntax errors and we used it to help guide us on how to work through issues with github and in the terminal, such as git control and the commands. 
 
-We did research on audio processing tools and settled on using librosa. Root mean squared was the simplest approach to cutting out notes since our files were already noise-reduced, so we were able to implement RMS manually. GenAI helped us implement the\
-\# Clamp boundaries to valid audio range:\
+We did research on audio processing tools and settled on using librosa. Root mean squared was the simplest approach to cutting out notes since our files were already noise-reduced, so we were able to implement RMS manually. GenAI helped us implement the \# Clamp boundaries to valid audio range:\
 &emsp;total_samples = len(data)\
 &emsp;boundaries = [\
 &emsp;&emsp;(max(0, s), min(total_samples, e))\
