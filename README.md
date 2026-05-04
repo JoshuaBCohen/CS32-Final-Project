@@ -21,8 +21,8 @@ Claude 4.6 was used for assistance writing code for the following parts:
 2. to help write the logic to ensure our audio arrays didn't go out of bounds to make our code more robust: \
   total_samples = len(data)\
   boundaries = [\
-    (max(0, s), min(total_samples, e))\
-    for s, e in boundaries\
+&emsp;(max(0, s), min(total_samples, e))\
+&emsp;for s, e in boundaries\
   ]
 3. We also used Generative AI to help identify and troubleshoot syntax errors during development.
 
