@@ -34,10 +34,22 @@ with open('CONFIG.txt') as settings:
     except ValueError:
         print('"Number of Pipes in Rank" must be a valid integer. Please update CONFIG.txt and try again.')
         settings_error = True
+    GPU_setting = settings.readline().split(':')[1].strip().lower()
+    if GPU_setting == 'y':
+        GPU_acceleration = True
+    elif GPU_setting == 'n':
+        GPU_acceleration = False
+    else:
+        print('"GPU acceleration must be either "Y" or "n."')
+        settings_error = True
     if settings_error:
         sys.exit(1)
 
+if not GPU_acceleration:
+    os.environ['CUDA_VISIBLE_DEVICES'] = '-1' #runs on cpu
+
 def main():
+    num_notes_saved = 0
     # Asks user for input and output folder and checks to makesure a path was entered
     path = askdirectory(title='Choose folder containing input files')
     if path == '':
@@ -55,14 +67,14 @@ def main():
 
     # Loops through files in dir_list opening each
     for file in dir_list:
-        if not file.endswith('.wav'):
+        if not file.lower().endswith('.wav'):
             print(f'{file} is not a WAVE file. Skipping it.')
         else:
             # opens input wave file
             samplerate, data = wavfile.read(os.path.join(path, file))
 
             # uses find_notes() to determine the start and stop of notes
-            cutout_samples = helpers.find_notes('skip') # function call on 'skip' is temporary for testing only
+            cutout_samples = helpers.find_notes(data, samplerate)
 
             # cuts out the the main wave file into smaller wave files in dict notes_dict
             notes_dict = helpers.cutout_notes(data, cutout_samples)
@@ -87,7 +99,10 @@ def main():
                 else:
                     file_name = note_names[midi_num + midi_offset]
                     print(f'Saving {file_name}...')
-                    wavfile.write(os.path.join(output_folder, f"{file_name}.wav"), ...)
+                    wavfile.write(os.path.join(output_folder, f"{file_name}.wav"), samplerate, notes)
+                    num_notes_saved += 1
+    if num_notes_saved != num_pipes:
+        print(f'Program skipped {num_pipes - num_notes_saved} notes.')
 
 if __name__ == "__main__":
     main()
