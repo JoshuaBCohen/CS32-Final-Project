@@ -19,7 +19,6 @@ GenAI helped us troubleshoot and understand how to run the code locally on our G
 Claude 4.6 was used for assistance writing code for the following parts:
 1. get_pitch() function - it helped write the code to convert stereo files to mono and to normalize them to 32 bit floats for use pitch detecting.
 2. to help write the logic to ensure our audio arrays didn't go out of bounds to make our code more robust:
-  # Clamp boundaries to valid audio range
   total_samples = len(data)
   boundaries = [
     (max(0, s), min(total_samples, e))
